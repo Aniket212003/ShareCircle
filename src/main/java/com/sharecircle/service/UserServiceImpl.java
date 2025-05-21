@@ -31,4 +31,15 @@ public class UserServiceImpl implements UserService
 		return userDao.checkUser(userName);
 	}
 
+	@Override
+	public String verifyUser(String email, String password) 
+	{
+		if(email == null || email.isEmpty() || password == null || password.isEmpty())
+		{
+			return null;
+		}
+		
+		return userDao.verifyUser(email,password); 
+	}
+
 }

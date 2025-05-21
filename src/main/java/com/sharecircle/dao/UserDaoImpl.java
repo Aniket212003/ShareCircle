@@ -54,4 +54,29 @@ public class UserDaoImpl implements UserDao
 		return false;
 	}
 
+	@Override
+	public String verifyUser(String email, String password) 
+	{
+		try(Session session = sessionFactory.openSession())
+		{
+			Query<String> query = session.createQuery("SELECT userName FROM User WHERE userEmail= :uemail AND password= :upassword", String.class);
+			query.setParameter("uemail", email);
+			query.setParameter("upassword", password);
+			
+			List<String> list = query.list();
+			
+			if(list.isEmpty())
+			{
+				return null;
+			}
+			
+			return list.get(0);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

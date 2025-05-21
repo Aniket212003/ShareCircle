@@ -7,4 +7,6 @@ public interface UserDao
 {
 	public abstract UserStatus addUser(User user);
 	public abstract Boolean checkUser(String userName);
+	public abstract String verifyUser(String email, String password);
+	
 }

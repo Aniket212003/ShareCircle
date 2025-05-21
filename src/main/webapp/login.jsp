@@ -18,19 +18,32 @@
             <h2>Welcome Back</h2>
             <p>Login to access your ShareCircle account</p>
         </div>
+        <%-- Display error messages from backend --%>
         
-        <form action="/login" method="POST">
+        <%
+        	
+        	if(request.getAttribute("error") != null) 
+        	{ 
+        %>
+            <div class="alert alert-danger" role="alert">
+                <%= request.getAttribute("error") %>
+            </div>
+        <% 
+        	} 
+        %>
+        
+        <form action="./LoginServlet" method="POST">
             <div class="mb-3">
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                    <input type="email" class="form-control" placeholder="Email Address" required>
+                    <input type="email" class="form-control" placeholder="Email Address" name="email" required>
                 </div>
             </div>
             
             <div class="mb-3">
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                    <input type="password" class="form-control" placeholder="Password" required>
+                    <input type="password" class="form-control" placeholder="Password" name="password" required>
                 </div>
             </div>
             
@@ -48,9 +61,11 @@
         <div class="login-footer">
             Don't have an account? <a href="signup.jsp">Sign up</a>
         </div>
-    </div>
+        
+   	</div>
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="js/login.js"></script>
 </body>
 </html>
