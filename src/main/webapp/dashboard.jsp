@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page session="false" %>
+
+<%
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +31,7 @@
         		return;
         	}
         	
-        	System.out.println(userName);
+        	//System.out.println(userName);
         %>
 
   <!-- Top Bar -->
@@ -33,7 +39,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h3>Welcome back, <span id="userName">Alex</span>!</h3>
+                    <h3>Welcome back, <span id="userName"><%=userName%></span>!</h3>
                     <div class="row mt-3">
                         <div class="col-4">
                             <div class="stat-card">
@@ -80,14 +86,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="container">
-        <!-- Explore Button -->
-        <div class="text-center mb-5">
-            <button class="btn btn-explore btn-lg">
-                <i class="fas fa-search me-2"></i> Explore Items
-            </button>
-        </div>
-        
+    <div class="container">        
         <!-- Dashboard Sections -->
         <div class="row">
             <!-- Your Listed Items -->
