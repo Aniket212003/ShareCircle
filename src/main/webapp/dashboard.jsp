@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page session="false" %>
-
-<%
-	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-	response.setHeader("Pragma", "no-cache");
-	response.setDateHeader("Expires", 0);
-%>
+<%@ include file="sessionCheck.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,20 +14,7 @@
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
-	   <% 
-	   		HttpSession session = request.getSession(false);
-	   		
-	   		String userName = (String) session.getAttribute("userName");	
-	   	
-        	if(session == null || userName == null)
-        	{
-        		response.sendRedirect("login.jsp");
-        		return;
-        	}
-        	
-        	//System.out.println(userName);
-        %>
-
+<form method="post">
   <!-- Top Bar -->
     <div class="top-bar mb-5">
         <div class="container">
@@ -74,8 +55,7 @@
                             <i class="fas fa-user text-primary"></i>
                         </div>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><a class="dropdown-item" href="./ProfileServlet"><i class="fas fa-user me-2"></i>Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="./LogoutServlet" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                         </ul>
@@ -430,5 +410,6 @@
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/dashboard.js"></script>
+</form>
 </body>
 </html>
