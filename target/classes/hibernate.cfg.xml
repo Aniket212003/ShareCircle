@@ -17,5 +17,6 @@
 			<property name="hibernate.format_sql">false</property>
 
 			<mapping class="com.sharecircle.entities.User"/>
+			<mapping class="com.sharecircle.entities.UserProfile"/>
 		</session-factory>
 </hibernate-configuration>

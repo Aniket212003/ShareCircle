@@ -79,4 +79,49 @@ public class UserDaoImpl implements UserDao
 		}
 	}
 
+	@Override
+	public Integer getUserID(String userName)
+	{
+		try(Session session = sessionFactory.openSession())
+		{
+			Query<Integer> userId = session.createQuery("SELECT userId FROM User WHERE userName= :uname", Integer.class);
+			userId.setParameter("uname", userName);
+			
+			List<Integer> list = userId.list();
+			
+			if(list.isEmpty())
+			{	
+				return null;
+			}
+			
+			return list.get(0);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public User getUserDeatils(Integer userId) 
+	{
+		try(Session session = sessionFactory.openSession())
+		{
+			User user = session.get(User.class, userId);
+			
+			if(user == null)
+			{	
+				return null;
+			}
+			
+			return user;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}		
+	}
+
 }
