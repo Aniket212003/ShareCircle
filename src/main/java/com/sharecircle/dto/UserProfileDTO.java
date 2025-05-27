@@ -20,9 +20,6 @@ public class UserProfileDTO
 	//private Integer profileId;
 	private String profileURL;
 	private String location;
-	private Integer itemsSoledCount;
-	private Integer itemsRentedCount;
-	private Integer itemsSharedCount;
 	private String bio;
 	
 	public UserProfileDTO(){}
@@ -44,9 +41,6 @@ public class UserProfileDTO
 		{
 			this.profileURL = userProfile.getProfileURL();
 			this.location = userProfile.getLocation();
-			this.itemsSoledCount = userProfile.getItemsSoledCount();
-			this.itemsRentedCount = userProfile.getItemsRentedCount();
-			this.itemsSharedCount = userProfile.getItemsSharedCount();
 			this.bio = userProfile.getBio();
 		}
 	}
@@ -139,30 +133,6 @@ public class UserProfileDTO
 
 	public void setLocation(String location) {
 		this.location = location;
-	}
-
-	public Integer getItemsSoledCount() {
-		return itemsSoledCount;
-	}
-
-	public void setItemsSoledCount(Integer itemsSoledCount) {
-		this.itemsSoledCount = itemsSoledCount;
-	}
-
-	public Integer getItemsRentedCount() {
-		return itemsRentedCount;
-	}
-
-	public void setItemsRentedCount(Integer itemsRentedCount) {
-		this.itemsRentedCount = itemsRentedCount;
-	}
-
-	public Integer getItemsSharedCount() {
-		return itemsSharedCount;
-	}
-
-	public void setItemsSharedCount(Integer itemsSharedCount) {
-		this.itemsSharedCount = itemsSharedCount;
 	}
 
 	public String getBio() {

@@ -57,7 +57,7 @@
         <div class="profile-header text-center text-md-start">
             <div class="row align-items-center">
                 <div class="col-md-2 text-center">
-                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQGM40WC-A2EcQ/profile-displayphoto-shrink_800_800/B4DZSYkN.cGkAc-/0/1737726419317?e=1753315200&v=beta&t=XiyI20btK-syKBFPKdDF3XpbiiUxIzPiKPYD0xubCJc" alt="Profile Picture" class="profile-picture">
+                    <img src="${user.getProfileURL()}" class="profile-picture">
                 </div>
                 <div class="col-md-10 mt-3 mt-md-0">
                     <h2>Edit Profile</h2>

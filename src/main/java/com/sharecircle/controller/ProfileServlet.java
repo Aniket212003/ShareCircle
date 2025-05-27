@@ -59,9 +59,6 @@ public class ProfileServlet extends HttpServlet {
 				request.setAttribute("userName", userName);
 				request.setAttribute("userEmail", userProfile.getUserEmail());
 				request.setAttribute("userBio", userProfile.getBio());
-				request.setAttribute("userItemSold", userProfile.getItemsSoledCount());
-				request.setAttribute("userItemRented", userProfile.getItemsRentedCount());
-				request.setAttribute("userItemShared", userProfile.getItemsSharedCount());
 				request.setAttribute("userLocation", userProfile.getLocation());
 				request.setAttribute("userJoined", userProfile.getCreatedAt());
 				request.setAttribute("userProfileURL", userProfile.getProfileURL());

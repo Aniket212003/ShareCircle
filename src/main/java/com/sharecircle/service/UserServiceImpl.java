@@ -108,6 +108,7 @@ public class UserServiceImpl implements UserService
 		//setting UserProfile.java information to update
 		userProfile.setLocation(userDTO.getLocation());
 		userProfile.setBio(userDTO.getBio());
+		user.setUserProfile(userProfile);
 		
 		return userDao.updateUser(user);
 		

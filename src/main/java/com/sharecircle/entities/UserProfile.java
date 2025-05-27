@@ -28,18 +28,9 @@ public class UserProfile
 	@Column(name="location")
 	private String location;
 	
-	@Column(name="items_sold_count")
-	private Integer itemsSoledCount;
-	
-	@Column(name="items_rented_count")
-	private Integer itemsRentedCount;
-	
-	@Column(name="items_shared_count")
-	private Integer itemsSharedCount;
-	
 	@Column(name="bio")
 	private String bio;
-
+	
 	public Integer getProfileId() {
 		return profileId;
 	}
@@ -70,30 +61,6 @@ public class UserProfile
 
 	public void setLocation(String location) {
 		this.location = location;
-	}
-
-	public Integer getItemsSoledCount() {
-		return itemsSoledCount;
-	}
-
-	public void setItemsSoledCount(Integer itemsSoledCount) {
-		this.itemsSoledCount = itemsSoledCount;
-	}
-
-	public Integer getItemsRentedCount() {
-		return itemsRentedCount;
-	}
-
-	public void setItemsRentedCount(Integer itemsRentedCount) {
-		this.itemsRentedCount = itemsRentedCount;
-	}
-
-	public Integer getItemsSharedCount() {
-		return itemsSharedCount;
-	}
-
-	public void setItemsSharedCount(Integer itemsSharedCount) {
-		this.itemsSharedCount = itemsSharedCount;
 	}
 
 	public String getBio() {
