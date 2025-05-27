@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/profile.css">
 </head>
 <body>
+<form method="post" action="editProfile.jsp">
     <!-- Top Bar with Navigation -->
     <div class="top-bar">
         <div class="container">
@@ -63,7 +64,7 @@
                     <p><i class="fas fa-map-marker-alt me-2"></i>${userLocation}</p>
                 </div>
                 <div class="col-md-4 text-center text-md-end mt-3 mt-md-0">
-                    <button class="btn btn-edit"><i class="fas fa-pencil-alt me-2"></i> Edit Profile</button>
+                    <button class="btn btn-edit"><i class="fas fa-pencil-alt me-2" name="editProfile"></i> Edit Profile</button>
                 </div>
             </div>
             
@@ -175,5 +176,6 @@
             console.log('Profile page loaded');
         });
     </script>
+</form>
 </body>
 </html>
