@@ -45,7 +45,8 @@ public class ProfileServlet extends HttpServlet {
 				request.setAttribute("error", message);
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 				return;
-			}
+			}		
+			
 			
 			String userName = (String) session.getAttribute("userName");
 			Integer userId = userService.getUserId(userName);

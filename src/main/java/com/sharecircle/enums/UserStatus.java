@@ -6,6 +6,8 @@ public enum UserStatus
 	FAILURE("Unable to Created Account"),
 	VALID_USER("Valid User"),
 	INVALID_USER("Invalid User Credentials"),
+	UPDATE_FAILURE("Unable to Update"),
+	UPDATE_SUCCESS("Updated SuccessFully"),
 	SOMETHING_WENT_WRONG("Something went wrong");
 	
 	private final String message;

@@ -11,4 +11,5 @@ public interface UserDao
 	public abstract String verifyUser(String email, String password);
 	public abstract Integer getUserID(String userName);
 	public abstract User getUserDeatils(Integer userId);
+	public abstract UserStatus updateUser(User user);
 }

@@ -12,6 +12,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/editProfile.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <form method="post" action="./editProfileUpdateServlet">
@@ -88,7 +89,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text">@</span>
                                     <input type="text" class="form-control" id="username" name="username" 
-                                           value="${user.getUserName()}" required>
+                                           value="${user.getUserName()}" readonly>
                                 </div>
                             </div>
                             
@@ -136,6 +137,29 @@
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<%
+    String alert = (String) request.getAttribute("alert");
+    String message = (String) request.getAttribute("message");
+
+    System.out.println(alert);
+    System.out.println(message);
+
+    if(alert != null && message != null) {
+%>
+    
+<script>
+    Swal.fire({
+        icon: '<%=alert%>',
+        title: '<%=message%>',
+        confirmButtonText: 'OK'
+    }).then(() => {
+        window.location.href = './ProfileServlet'; // Redirect after OK
+    });
+</script>
+
+<%
+    }
+%>
 </form>
 </body>
 </html>

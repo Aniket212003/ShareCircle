@@ -124,4 +124,22 @@ public class UserDaoImpl implements UserDao
 		}		
 	}
 
+	@Override
+	public UserStatus updateUser(User user) 
+	{
+		try(Session session = sessionFactory.openSession())
+		{
+			Transaction txn = session.beginTransaction();
+			session.saveOrUpdate(user);
+			txn.commit();
+			
+			return UserStatus.UPDATE_SUCCESS;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return UserStatus.UPDATE_FAILURE;
+		}
+	}
+
 }

@@ -3,6 +3,7 @@ package com.sharecircle.service;
 import com.sharecircle.dao.UserDao;
 import com.sharecircle.dto.UserProfileDTO;
 import com.sharecircle.entities.User;
+import com.sharecircle.entities.UserProfile;
 import com.sharecircle.enums.UserStatus;
 import com.sharecircle.factory.UserDaoFactory;
 
@@ -70,6 +71,46 @@ public class UserServiceImpl implements UserService
 		}
 		
 		return new UserProfileDTO(user);
+	}
+
+	@Override
+	public UserStatus updateUserProfile(UserProfileDTO userDTO) 
+	{
+		if(userDTO == null)
+		{
+			return UserStatus.SOMETHING_WENT_WRONG;
+		}
+		//Got userId by passing userName
+		Integer userID = userDao.getUserID(userDTO.getUserName());
+		
+		if(userID == null)
+		{
+			return UserStatus.INVALID_USER;
+		}
+		//Got targeted User's Object by passing userID to update
+		User user = userDao.getUserDeatils(userID);
+		//Got userProfile details by user's object
+		UserProfile userProfile = user.getUserProfile();
+		
+		//setting User.java information to update
+		user.setFirstName(userDTO.getFirstName());
+		user.setLastName(userDTO.getLastName());
+		user.setUserEmail(userDTO.getUserEmail());
+		user.setUserPhoneNumber(userDTO.getUserPhoneNumber());
+		
+		//If userProfile is Empty, then created new UserProfile and then inserting
+		if(userProfile == null)
+		{
+			userProfile = new UserProfile();
+			userProfile.setUser(user);
+		}
+		
+		//setting UserProfile.java information to update
+		userProfile.setLocation(userDTO.getLocation());
+		userProfile.setBio(userDTO.getBio());
+		
+		return userDao.updateUser(user);
+		
 	}
 
 }

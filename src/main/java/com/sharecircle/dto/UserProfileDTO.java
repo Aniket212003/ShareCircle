@@ -25,6 +25,8 @@ public class UserProfileDTO
 	private Integer itemsSharedCount;
 	private String bio;
 	
+	public UserProfileDTO(){}
+	
 	public UserProfileDTO(User user)
 	{
 		this.userId = user.getUserId();
