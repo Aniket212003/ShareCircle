@@ -7,6 +7,8 @@ public class UserProfileDTO
 {
 	//User.java 
 	private Integer userId;
+	private String firstName;
+	private String lastName;
 	private String fullName;
 	private String userName;
 	private String userEmail;
@@ -26,6 +28,8 @@ public class UserProfileDTO
 	public UserProfileDTO(User user)
 	{
 		this.userId = user.getUserId();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
 		this.fullName = user.getFirstName() + " " + user.getLastName();
 		this.userName = user.getUserName();
 		this.userEmail = user.getUserEmail();
@@ -50,6 +54,22 @@ public class UserProfileDTO
 	}
 	
 	
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
 	public String getFullName() {
 		return fullName;

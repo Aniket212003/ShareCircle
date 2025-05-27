@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/profile.css">
 </head>
 <body>
-<form method="post" action="editProfile.jsp">
+<form method="post" action="./editProfileLoadServlet">
     <!-- Top Bar with Navigation -->
     <div class="top-bar">
         <div class="container">

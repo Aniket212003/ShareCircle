@@ -69,21 +69,17 @@
         <div class="row mt-4">
             <div class="col-md-8 mx-auto">
                 <div class="profile-card card">
-                    <div class="card-body">
-                        <form id="editProfileForm" action="UpdateProfileServlet" method="POST">
-                            <!-- Hidden field for user ID -->
-                            <input type="hidden" name="userId" value="${user.id}">
-                            
+                    <div class="card-body">                            
                             <div class="row mb-4">
                                 <div class="col-md-6 mb-3">
                                     <label for="firstName" class="form-label">First Name</label>
                                     <input type="text" class="form-control" id="firstName" name="firstName" 
-                                           value="${user.firstName}" required>
+                                           value="${user.getFirstName()}" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="lastName" class="form-label">Last Name</label>
                                     <input type="text" class="form-control" id="lastName" name="lastName" 
-                                           value="${user.lastName}" required>
+                                           value="${user.getLastName()}" required>
                                 </div>
                             </div>
                             
@@ -92,38 +88,37 @@
                                 <div class="input-group">
                                     <span class="input-group-text">@</span>
                                     <input type="text" class="form-control" id="username" name="username" 
-                                           value="${user.username}" required>
+                                           value="${user.getUserName()}" required>
                                 </div>
                             </div>
                             
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email Address</label>
                                 <input type="email" class="form-control" id="email" name="email" 
-                                       value="${user.email}" required>
+                                       value="${user.getUserEmail()}" required>
                             </div>
                             
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Phone Number</label>
                                 <input type="tel" class="form-control" id="phone" name="phone" 
-                                       value="${user.phone}">
+                                       value="${user.getUserPhoneNumber()}">
                             </div>
                             
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
-                                <textarea class="form-control" id="address" name="address" rows="2">${user.address}</textarea>
+                                <textarea class="form-control" id="address" name="address" rows="2">${user.getLocation()}</textarea>
                             </div>
                             
                             <div class="mb-3">
                                 <label for="bio" class="form-label">Bio</label>
-                                <textarea class="form-control" id="bio" name="bio" rows="4">${user.bio}</textarea>
+                                <textarea class="form-control" id="bio" name="bio" rows="4">${user.getBio()}</textarea>
                                 <div class="form-text">Tell the community a bit about yourself</div>
                             </div>
                             
                             <div class="d-flex justify-content-end mt-4">
-                                <a href="profile.html" class="btn btn-cancel me-3">Cancel</a>
-                                <button type="submit" class="btn btn-save">Save Changes</button>
+                                <a href="./ProfileServlet" class="btn btn-cancel me-3">Cancel</a>
+                                <button type="submit" class="btn btn-save" name="save">Save Changes</button>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
