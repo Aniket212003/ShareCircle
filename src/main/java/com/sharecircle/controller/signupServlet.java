@@ -36,7 +36,7 @@ public class signupServlet extends HttpServlet {
 		response.setContentType("text/html");
 		//PrintWriter out = response.getWriter();
 		RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
-		
+		String message = null;
 		try
 		{
 			String firstName = request.getParameter("firstName");
@@ -71,11 +71,15 @@ public class signupServlet extends HttpServlet {
 				
 				if(status == UserStatus.SUCCESS)
 				{	
-					request.setAttribute("success", status.getMessage());
+					message = "Account Created Successfully !!";
+					request.setAttribute("alert", "success");
+					request.setAttribute("message", message);
 				}
 				else
 				{
-					request.setAttribute("error", status.getMessage());
+					message = "Failed to Created Account !!";
+					request.setAttribute("alert", "error");
+					request.setAttribute("message", message);
 				}
 			}
 			
@@ -85,6 +89,9 @@ public class signupServlet extends HttpServlet {
 		{
 			e.printStackTrace();
 			System.out.println("Something went Wrong !");
+			message = "Something went Wrong ! !!";
+			request.setAttribute("alert", "error");
+			request.setAttribute("message", message);
 		}
 		finally
 		{

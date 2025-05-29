@@ -17,27 +17,6 @@
             <p>Join ShareCircle to start sharing resources</p>
         </div>
         <%-- Display error messages from backend --%>
-        <% 
-        	if(request.getAttribute("error") != null) 
-        	{ 
-        %>
-            <div class="alert alert-danger" role="alert">
-                <%= request.getAttribute("error") %>
-            </div>
-        <% 
-        	} 
-        %>
-        
-        <% 
-        	if(request.getAttribute("success") != null)
-        	{ 
-        %>
-            <div class="alert alert-success" role="alert">
-                <%= request.getAttribute("success") %>
-            </div>
-        <% 
-        	} 
-        %>
         <form action="./signupServlet" method="POST" id="signupForm" novalidate>
             <div class="row">
                 <div class="col-md-6 mb-3">
@@ -111,6 +90,29 @@
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="js/signup.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<%
+    String alert = (String) request.getAttribute("alert");
+    String message = (String) request.getAttribute("message");
+
+    System.out.println(alert);
+    System.out.println(message);
+
+    if(alert != null && message != null) {
+%>
     
+<script>
+    Swal.fire({
+        icon: '<%=alert%>',
+        title: '<%=message%>',
+        confirmButtonText: 'OK'
+    }).then(() => {
+        window.location.href = 'signup.jsp'; // Redirect after OK
+    });
+</script>
+
+<%
+    }
+%>
 </body>
 </html>
