@@ -41,7 +41,7 @@
 <%
 	String success = (String) request.getAttribute("success"); 
 %>
-<script>
+<!-- <script>
 Swal.fire({
   position: "top-middle",
   icon: "success",
@@ -49,6 +49,6 @@ Swal.fire({
   showConfirmButton: false,
   timer: 1500
 });	
-</script>	
+</script> -->	
 </body>
 </html>
