@@ -39,16 +39,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <%
-	String success = (String) request.getAttribute("success"); 
+    String alert = (String) request.getAttribute("alert");
+    String message = (String) request.getAttribute("message");
+
+    System.out.println(alert);
+    System.out.println(message);
+
+    if(alert != null && message != null) {
 %>
-<!-- <script>
-Swal.fire({
-  position: "top-middle",
-  icon: "success",
-  title: "Your work has been saved",
-  showConfirmButton: false,
-  timer: 1500
-});	
-</script> -->	
+    
+<script>
+    Swal.fire({
+        icon: '<%=alert%>',
+        title: '<%=message%>',
+        confirmButtonText: 'OK'
+    }).then(() => {
+        window.location.href = 'forgetPassword.jsp'; // Redirect after OK
+    });
+</script>
+
+<%
+    }
+%>	
 </body>
 </html>

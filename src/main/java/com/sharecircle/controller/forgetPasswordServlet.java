@@ -27,7 +27,7 @@ public class forgetPasswordServlet extends HttpServlet {
 		try
 		{
 			UserService userService = UserServiceFactory.getUserServiceInstance();
-			
+			String message = null;
 			String userName =  request.getParameter("username");
 			String action = request.getParameter("reset");
 			
@@ -41,7 +41,10 @@ public class forgetPasswordServlet extends HttpServlet {
 				}
 				else
 				{
-					
+					message = "Invalid Username !!";
+					request.setAttribute("alert", "error");
+					request.setAttribute("message", message);
+					request.getRequestDispatcher("forgetPassword.jsp").forward(request, response);
 				}
 			}
 		}
