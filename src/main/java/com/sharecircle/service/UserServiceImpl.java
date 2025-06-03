@@ -114,4 +114,20 @@ public class UserServiceImpl implements UserService
 		
 	}
 
+	@Override
+	public UserStatus resetPassword(String userName, String newPassword) 
+	{
+		if(userName == null || userName.isEmpty())
+		{
+			return null;
+		}
+		
+		if(newPassword == null || newPassword.isEmpty())
+		{
+			return null;
+		}
+		
+		return userDao.resetPassword(userName,newPassword);
+	}
+
 }

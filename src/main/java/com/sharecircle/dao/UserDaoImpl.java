@@ -18,9 +18,10 @@ public class UserDaoImpl implements UserDao
 	@Override
 	public UserStatus addUser(User user) 
 	{
+		Transaction txn = null;
 		try(Session session = sessionFactory.openSession())
 		{			
-			Transaction txn = session.beginTransaction();
+			txn = session.beginTransaction();
 			session.save(user);
 			txn.commit();
 			
@@ -30,6 +31,7 @@ public class UserDaoImpl implements UserDao
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			txn.rollback();
 			return UserStatus.FAILURE;
 		}
 	}
@@ -127,9 +129,10 @@ public class UserDaoImpl implements UserDao
 	@Override
 	public UserStatus updateUser(User user) 
 	{
+		Transaction txn = null;
 		try(Session session = sessionFactory.openSession())
 		{
-			Transaction txn = session.beginTransaction();
+			txn = session.beginTransaction();
 			session.saveOrUpdate(user);
 			txn.commit();
 			
@@ -138,6 +141,32 @@ public class UserDaoImpl implements UserDao
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			txn.rollback();
+			return UserStatus.UPDATE_FAILURE;
+		}
+	}
+
+	@Override
+	public UserStatus resetPassword(String userName, String newPassword) 
+	{
+		Transaction txn = null;
+		try(Session session = sessionFactory.openSession())
+		{
+			Query<?> query = session.createQuery("UPDATE User SET password= :pass WHERE userName= :uname");
+			query.setParameter("pass", newPassword);
+			query.setParameter("uname", userName);
+			
+			txn = session.beginTransaction();
+			query.executeUpdate();
+			txn.commit();
+			
+			return UserStatus.UPDATE_SUCCESS;
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			txn.rollback();
 			return UserStatus.UPDATE_FAILURE;
 		}
 	}
