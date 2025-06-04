@@ -360,7 +360,7 @@
             <i class="fas fa-plus"></i>
         </div>
         <div class="action-menu" id="actionMenu">
-            <div class="action-item d-flex align-items-center" onclick="window.location.href='share-item.html'">
+            <div class="action-item d-flex align-items-center" onclick="window.location.href='addItem.jsp'">
                 <i class="fas fa-share-alt me-2 text-primary"></i>
                 <span>Share an Item</span>
             </div>
