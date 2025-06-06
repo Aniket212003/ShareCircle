@@ -1,5 +1,8 @@
 package com.sharecircle.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,6 +45,20 @@ public class User
 	
 	@OneToOne(mappedBy="user",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private UserProfile userProfile;
+	
+	private List<Item> items = new ArrayList<>();
+
+	public void addItem(Item item)
+	{
+		items.add(item);
+		item.setOwner(this);
+	}
+	
+	public void removeItem(Item item)
+	{
+		items.remove(item);
+		item.setOwner(null);
+	}
 
 	public UserProfile getUserProfile() {
 		return userProfile;
