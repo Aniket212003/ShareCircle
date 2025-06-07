@@ -3,7 +3,15 @@ package com.sharecircle.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.UUID;
+
+import com.sharecircle.entities.Item;
+import com.sharecircle.entities.ItemImage;
+import com.sharecircle.entities.Pincode;
+import com.sharecircle.enums.Category;
+import com.sharecircle.enums.ListingType;
+import com.sharecircle.enums.PickupOptions;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -44,8 +52,6 @@ public class AddItemServlet extends HttpServlet {
 		
 		//String userName = (String) session.getAttribute("userName");
 		
-		//out.println("Heyy this is " + userName + " logged In !" );
-		
 		String applicationPath = "D:\\Aniket\\STUDY\\Java\\WEB eclipse\\WebEclipse-Projects\\ShareCircle-Research-Project\\src\\main\\webapp";
         String uploadPath = applicationPath + File.separator + UPLOAD_DIR;
 
@@ -55,28 +61,28 @@ public class AddItemServlet extends HttpServlet {
             uploadDir.mkdirs();
         }
         
-        System.out.println("Application path: " + applicationPath);
-        System.out.println("Upload path: " + uploadPath);
-        System.out.println("Upload directory exists: " + uploadDir.exists());
-        System.out.println("Upload directory writable: " + uploadDir.canWrite());
         
         try 
         {
+        	Item item = new Item();
+        	ItemImage itemImage = new ItemImage();
             // Process each file part
             for (Part part : request.getParts()) 
             {
                 if (part.getName().equals("itemImages") && part.getSize() > 0) 
                 {
-                    // Generate unique filename
+                    
                     String fileName = UUID.randomUUID().toString() + "_" + extractFileName(part);
                     System.out.println("Saving to: " + uploadPath + File.separator + fileName);
-                    // Save file
                     part.write(uploadPath + File.separator + fileName);
-                    
+                    itemImage.setImageName(fileName);
+                    item.addImages(itemImage);
                     // Here you would typically save the filename to your database
                     // along with other item information
                 }
             }
+            
+            
             
             String itemName = request.getParameter("itemName");
             String category = request.getParameter("category");
@@ -89,24 +95,77 @@ public class AddItemServlet extends HttpServlet {
             String rentDeposit = request.getParameter("rentDeposit");
             String sellPrice = request.getParameter("sellPrice");
             String pickupOptions = request.getParameter("pickupOptions");
-            Integer pincode = Integer.parseInt(request.getParameter("pincode"));
+            String pincode = request.getParameter("pincode");
             String address = request.getParameter("address");
             
-            out.println(
-				            itemName + " " +
-				            category + " " +
-				            shortDescription + " " +
-				            detailedDescription + " " +
-				            startDate + " " +
-				            endDate + " " +
-				            listingType + " " +
-				            rentPrice + " " +
-				            rentDeposit + " " +
-				            sellPrice + " " +
-				            pickupOptions + " " +
-				            pincode + " " +
-				            address
-				       );
+            LocalDate sDate = null;
+            LocalDate eDate = null;
+            Double rPrice = null;
+            Double dPrice = null;
+            Double sPrice = null;
+            
+            if(startDate != null || !startDate.isEmpty())
+            {
+            	sDate = LocalDate.parse(startDate);
+            }
+            
+            if(endDate != null || !endDate.isEmpty())
+            {
+            	eDate = LocalDate.parse(endDate);
+            }
+            
+            if(rentPrice != null || !rentPrice.isEmpty())
+            {
+            	rPrice = Double.parseDouble(rentPrice);
+            }
+            
+            if(rentDeposit != null || !rentDeposit.isEmpty())
+            {
+            	dPrice = Double.parseDouble(rentDeposit);
+            }
+            
+            if(sellPrice != null || !sellPrice.isEmpty())
+            {
+            	sPrice = Double.parseDouble(sellPrice);
+            }
+            
+            Pincode pincodeClass = PinCodeService.getInfo(pincode);
+            
+            item.setItemId(UUID.randomUUID().toString());
+            item.setItemName(itemName);
+            item.setCategory(Category.valueOf(category));
+            item.setShortDescription(shortDescription);
+            item.setDetailedDescription(detailedDescription);
+            item.setStartDate(sDate);
+            item.setEndDate(eDate);
+            item.setListingType(ListingType.valueOf(listingType));
+            item.setRentPrice(rPrice);
+            item.setRentDeposit(dPrice);
+            item.setSellPrice(sPrice);
+            item.setPickupOptions(PickupOptions.valueOf(pickupOptions));
+            item.setPincode(pincodeClass);
+            item.setAddress(address);
+            
+            itemImage.setItem(item);
+            
+            
+            
+            
+//            out.println(
+//				            itemName + " " +
+//				            category + " " +
+//				            shortDescription + " " +
+//				            detailedDescription + " " +
+//				            startDate + " " +
+//				            endDate + " " +
+//				            listingType + " " +
+//				            rentPrice + " " +
+//				            rentDeposit + " " +
+//				            sellPrice + " " +
+//				            pickupOptions + " " +
+//				            pincode + " " +
+//				            address
+//				       );
             
         }
         catch(Exception e)
@@ -116,11 +175,14 @@ public class AddItemServlet extends HttpServlet {
         
 	}
 	
-	private String extractFileName(Part part) {
+	private String extractFileName(Part part) 
+	{
         String contentDisp = part.getHeader("content-disposition");
         String[] items = contentDisp.split(";");
-        for (String s : items) {
-            if (s.trim().startsWith("filename")) {
+        for (String s : items) 
+        {
+            if (s.trim().startsWith("filename")) 
+            {
                 return s.substring(s.indexOf("=") + 2, s.length() - 1);
             }
         }

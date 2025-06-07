@@ -79,7 +79,7 @@ public class Item
 	@Column(name = "address", length = 255)
 	private String address;
 	
-	@Column(name = "created_at", nullable = false, updatable = false,
+	@Column(name = "created_at",insertable = false ,nullable = false, updatable = false,
             columnDefinition = "TIMESTAMP WITH TIME ZONE DEFAULT now()")
 	private String createdAt;
 	
@@ -216,7 +216,8 @@ public class Item
 		return pincode;
 	}
 
-	public void setPincode(Pincode pincode) {
+	public void setPincode(Pincode pincode) 
+	{
 		this.pincode = pincode;
 	}
 
