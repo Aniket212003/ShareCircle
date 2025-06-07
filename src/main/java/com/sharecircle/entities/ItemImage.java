@@ -15,15 +15,15 @@ import javax.persistence.Table;
 public class ItemImage 
 {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="item_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="image_id")
 	private Integer image_id;
 	
 	@Column(name="image_name", nullable = false)
 	private String imageName;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id", nullable = false)
+    @JoinColumn(name = "item_id",nullable=false)
     private Item item;
 
 	public void setItem(Item item) 

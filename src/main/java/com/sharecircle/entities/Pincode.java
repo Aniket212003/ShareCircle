@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -29,6 +31,10 @@ public class Pincode
 	@Column(name="state")
 	private String state;
 	
+	@OneToMany(
+	        mappedBy = "pincode",
+	        fetch = FetchType.LAZY
+	    )
 	private List<Item> items = new ArrayList<>();
 	
 	public void addItem(Item item)

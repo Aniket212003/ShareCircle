@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -46,6 +47,11 @@ public class User
 	@OneToOne(mappedBy="user",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private UserProfile userProfile;
 	
+	@OneToMany(
+	        mappedBy = "owner",
+	        cascade = CascadeType.ALL,
+	        orphanRemoval = true,
+	        fetch = FetchType.LAZY)
 	private List<Item> items = new ArrayList<>();
 
 	public void addItem(Item item)

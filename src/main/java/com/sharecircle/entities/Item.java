@@ -1,6 +1,7 @@
 package com.sharecircle.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,14 +23,14 @@ import com.sharecircle.enums.PickupOptions;
 
 
 @Entity
-@Table(name="sharecircle_item")
+@Table(name="add_item")
 public class Item 
 {
 	@Id
 	@Column(name="item_id",nullable = false, length = 36)
 	private String itemId;
 	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="owner_id",nullable=false)
 	private User owner;
 	
@@ -37,13 +38,13 @@ public class Item
 	private String itemName;
 	
 	@Enumerated(EnumType.STRING)
-    @Column(name = "category", nullable = false, columnDefinition = "category_enum")
+    @Column(name = "category", nullable = false)
 	private Category category;
     
 	@Column(name = "short_description", length = 255)
 	private String shortDescription;
 	
-	@Column(name = "deatil_description",columnDefinition = "TEXT")
+	@Column(name = "detail_description",columnDefinition = "TEXT")
 	private String DetailedDescription;
 	
 	@Enumerated(EnumType.STRING)
@@ -53,7 +54,7 @@ public class Item
 	@Column(name="rent_price")
 	private Double rentPrice;
 	
-	@Column(name="rent_deposit")
+	@Column(name="rent_deposite")
 	private Double rentDeposit;
 	
 	@Column(name="sell_price")
@@ -79,9 +80,8 @@ public class Item
 	@Column(name = "address", length = 255)
 	private String address;
 	
-	@Column(name = "created_at",insertable = false ,nullable = false, updatable = false,
-            columnDefinition = "TIMESTAMP WITH TIME ZONE DEFAULT now()")
-	private String createdAt;
+	@Column(name = "created_at",insertable = false ,nullable = false, updatable = false)
+	private LocalDateTime createdAt;
 	
 	@OneToMany(
 	        mappedBy = "item",
@@ -229,11 +229,11 @@ public class Item
 		this.address = address;
 	}
 
-	public String getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
 

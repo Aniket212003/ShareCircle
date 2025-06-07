@@ -64,13 +64,13 @@
                                 <label for="category" class="form-label">Category *</label>
                                 <select class="form-select" id="category" name="category" required>
                                     <option value="" selected disabled>Select Category</option>
-                                    <option value="Books">Books</option>
-                                    <option value="Electronics">Electronics</option>
-                                    <option value="Tools">Tools</option>
-                                    <option value="Study Materials">Study Materials</option>
-                                    <option value="Furniture">Furniture</option>
-                                    <option value="Sports Equipment">Sports Equipment</option>
-                                    <option value="Other">Other</option>
+                                    <option value="BOOKS">Books</option>
+                                    <option value="ELECTRONICS">Electronics</option>
+                                    <option value="TOOLS">Tools</option>
+                                    <option value="STUDY_MATERIALS">Study Materials</option>
+                                    <option value="FURNITURE">Furniture</option>
+                                    <option value="SPORTS">Sports Equipment</option>
+                                    <option value="OTHER">Other</option>
                                 </select>
                             </div>
                             
@@ -113,19 +113,19 @@
                             <div class="mb-3">
                                 <label class="form-label">Listing Type *</label>
                                 <div class="form-check">
-                                    <input class="form-check-input listing-type" type="radio" name="listingType" id="share" value="share" checked>
+                                    <input class="form-check-input listing-type" type="radio" name="listingType" id="share" value="SHARE" checked>
                                     <label class="form-check-label" for="share">
                                         Share (Free)
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input listing-type" type="radio" name="listingType" id="rent" value="rent">
+                                    <input class="form-check-input listing-type" type="radio" name="listingType" id="rent" value="RENT">
                                     <label class="form-check-label" for="rent">
                                         Rent
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input listing-type" type="radio" name="listingType" id="sell" value="sell">
+                                    <input class="form-check-input listing-type" type="radio" name="listingType" id="sell" value="SELL">
                                     <label class="form-check-label" for="sell">
                                         Sell
                                     </label>
@@ -153,19 +153,19 @@
                             <div class="mb-3">
                                 <label class="form-label">Pickup Options *</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="pickupOptions" id="pickup" value="pickup" checked>
+                                    <input class="form-check-input" type="checkbox" name="pickupOptions" id="pickup" value="PICK_UP" checked>
                                     <label class="form-check-label" for="pickup">
                                         Pickup from my location
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="pickupOptions" id="mutualLocation" value="mutualLocation">
+                                    <input class="form-check-input" type="checkbox" name="pickupOptions" id="mutualLocation" value="MUTUAL_LOACTION">
                                     <label class="form-check-label" for="mutualLocation">
                                         Meet at mutual location
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="pickupOptions" id="delivery" value="delivery">
+                                    <input class="form-check-input" type="checkbox" name="pickupOptions" id="delivery" value="DELIVERY">
                                     <label class="form-check-label" for="delivery">
                                         Delivery (charges may apply)
                                     </label>
@@ -201,6 +201,30 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/addItem.js"></script>
+<%
+    String alert = (String) request.getAttribute("alert");
+    String message = (String) request.getAttribute("message");
+
+    System.out.println(alert);
+    System.out.println(message);
+
+    if(alert != null && message != null) {
+%>
+    
+<script>
+    Swal.fire({
+        icon: '<%=alert%>',
+        title: '<%=message%>',
+        confirmButtonText: 'OK'
+    }).then(() => {
+        window.location.href = 'addItem.jsp'; // Redirect after OK
+    });
+</script>
+
+<%
+    }
+%>
 </body>
 </html>

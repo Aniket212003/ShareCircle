@@ -130,4 +130,22 @@ public class UserServiceImpl implements UserService
 		return userDao.resetPassword(userName,newPassword);
 	}
 
+	@Override
+	public User getUserDeatils(Integer userId) 
+	{
+		if(userId == null)
+		{
+			return null;
+		}
+		
+		User user = userDao.getUserDeatils(userId);
+		
+		if(user == null)
+		{
+			return null;
+		}
+		
+		return user;
+	}
+
 }

@@ -11,6 +11,7 @@ public interface UserService
 	public abstract String verifyUser(String email, String password);
 	public abstract Integer getUserId(String userName);
 	public abstract UserProfileDTO getUserDetails(Integer userId);
+	public abstract User getUserDeatils(Integer userId);
 	public abstract UserStatus updateUserProfile(UserProfileDTO userDTO);
 	public abstract UserStatus resetPassword(String userName, String newPassword);
 }

@@ -2,16 +2,24 @@ package com.sharecircle.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.UUID;
 
 import com.sharecircle.entities.Item;
 import com.sharecircle.entities.ItemImage;
 import com.sharecircle.entities.Pincode;
+import com.sharecircle.entities.User;
 import com.sharecircle.enums.Category;
+import com.sharecircle.enums.ItemStatus;
 import com.sharecircle.enums.ListingType;
 import com.sharecircle.enums.PickupOptions;
+import com.sharecircle.factory.ItemServiceFactory;
+import com.sharecircle.factory.PincodeServiceFactory;
+import com.sharecircle.factory.UserServiceFactory;
+import com.sharecircle.service.ItemService;
+import com.sharecircle.service.PincodeService;
+import com.sharecircle.service.UserService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -38,9 +46,10 @@ public class AddItemServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
+		//PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession(false);
 		String message = null;
+		
 		if (session == null || session.getAttribute("userName") == null) 
 		{
 			message = "Somthing went Wrong";
@@ -49,8 +58,13 @@ public class AddItemServlet extends HttpServlet {
 			return;
 		}
 		
+		UserService userService = UserServiceFactory.getUserServiceInstance();
+		PincodeService pincodeService = PincodeServiceFactory.getPincodeServiceInstance();
+		ItemService itemService = ItemServiceFactory.getItemServiceInstance();
 		
-		//String userName = (String) session.getAttribute("userName");
+		String userName = (String) session.getAttribute("userName");
+		Integer userId = userService.getUserId(userName);
+		
 		
 		String applicationPath = "D:\\Aniket\\STUDY\\Java\\WEB eclipse\\WebEclipse-Projects\\ShareCircle-Research-Project\\src\\main\\webapp";
         String uploadPath = applicationPath + File.separator + UPLOAD_DIR;
@@ -65,7 +79,7 @@ public class AddItemServlet extends HttpServlet {
         try 
         {
         	Item item = new Item();
-        	ItemImage itemImage = new ItemImage();
+        	User user = userService.getUserDeatils(userId);
             // Process each file part
             for (Part part : request.getParts()) 
             {
@@ -74,6 +88,7 @@ public class AddItemServlet extends HttpServlet {
                     
                     String fileName = UUID.randomUUID().toString() + "_" + extractFileName(part);
                     System.out.println("Saving to: " + uploadPath + File.separator + fileName);
+                    ItemImage itemImage = new ItemImage();
                     part.write(uploadPath + File.separator + fileName);
                     itemImage.setImageName(fileName);
                     item.addImages(itemImage);
@@ -104,52 +119,65 @@ public class AddItemServlet extends HttpServlet {
             Double dPrice = null;
             Double sPrice = null;
             
-            if(startDate != null || !startDate.isEmpty())
+            if(startDate != null)
             {
             	sDate = LocalDate.parse(startDate);
             }
             
-            if(endDate != null || !endDate.isEmpty())
+            if(endDate != null)
             {
             	eDate = LocalDate.parse(endDate);
             }
             
-            if(rentPrice != null || !rentPrice.isEmpty())
+//            if(rentPrice != null)
+//            {
+//            	rPrice = Double.parseDouble(rentPrice);
+//            }
+//            
+//            if(rentDeposit != null)
+//            {
+//            	dPrice = Double.parseDouble(rentDeposit);
+//            }
+//            
+//            if(sellPrice != null)
+//            {
+//            	sPrice = Double.parseDouble(sellPrice);
+//            }
+            
+            Pincode pincodeClass = pincodeService.getInfo(pincode);
+            
+	            item.setItemId(UUID.randomUUID().toString());
+	            item.setItemName(itemName);
+	            item.setOwner(user);
+	            item.setCategory(Category.valueOf(category));
+	            item.setShortDescription(shortDescription);
+	            item.setDetailedDescription(detailedDescription);
+	            item.setStartDate(sDate);
+	            item.setEndDate(eDate);
+	            item.setListingType(ListingType.valueOf(listingType));
+	            //item.setRentPrice(rPrice);
+	            //item.setRentDeposit(dPrice);
+	            //item.setSellPrice(sPrice);
+	            item.setPickupOptions(PickupOptions.valueOf(pickupOptions));
+	            item.setPincode(pincodeClass);
+	            item.setAddress(address);
+	            
+	            ItemStatus status = itemService.addItem(item);
+            
+            if(status == ItemStatus.ADDED_SUCCESSFULLY)
             {
-            	rPrice = Double.parseDouble(rentPrice);
+            	message = ItemStatus.ADDED_SUCCESSFULLY.getMessage();
+            	request.setAttribute("alert", "success");
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("addItem.jsp").forward(request, response);
             }
-            
-            if(rentDeposit != null || !rentDeposit.isEmpty())
+            else
             {
-            	dPrice = Double.parseDouble(rentDeposit);
+            	message = ItemStatus.FAILED.getMessage();
+            	request.setAttribute("alert", "error");
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("addItem.jsp").forward(request, response);
             }
-            
-            if(sellPrice != null || !sellPrice.isEmpty())
-            {
-            	sPrice = Double.parseDouble(sellPrice);
-            }
-            
-            Pincode pincodeClass = PinCodeService.getInfo(pincode);
-            
-            item.setItemId(UUID.randomUUID().toString());
-            item.setItemName(itemName);
-            item.setCategory(Category.valueOf(category));
-            item.setShortDescription(shortDescription);
-            item.setDetailedDescription(detailedDescription);
-            item.setStartDate(sDate);
-            item.setEndDate(eDate);
-            item.setListingType(ListingType.valueOf(listingType));
-            item.setRentPrice(rPrice);
-            item.setRentDeposit(dPrice);
-            item.setSellPrice(sPrice);
-            item.setPickupOptions(PickupOptions.valueOf(pickupOptions));
-            item.setPincode(pincodeClass);
-            item.setAddress(address);
-            
-            itemImage.setItem(item);
-            
-            
-            
             
 //            out.println(
 //				            itemName + " " +
@@ -171,6 +199,10 @@ public class AddItemServlet extends HttpServlet {
         catch(Exception e)
         {
         	e.printStackTrace();
+        	message = ItemStatus.FAILURE.getMessage();
+        	request.setAttribute("alert", "error");
+			request.setAttribute("message", message);
+			request.getRequestDispatcher("addItem.jsp").forward(request, response);
         }
         
 	}

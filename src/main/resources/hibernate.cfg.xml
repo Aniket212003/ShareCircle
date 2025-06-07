@@ -14,9 +14,12 @@
 			<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 			<property name="hibernate.show_sql">true</property>
 			<!-- <property name="hibernate.hbm2ddl.auto">create</property> --> 
-			<property name="hibernate.format_sql">false</property>
+			<property name="hibernate.format_sql">true</property>
 
 			<mapping class="com.sharecircle.entities.User"/>
 			<mapping class="com.sharecircle.entities.UserProfile"/>
+			<mapping class="com.sharecircle.entities.Item"/>
+			<mapping class="com.sharecircle.entities.ItemImage"/>
+			<mapping class="com.sharecircle.entities.Pincode"/>
 		</session-factory>
 </hibernate-configuration>
