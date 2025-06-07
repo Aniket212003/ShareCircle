@@ -10,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,9 +26,8 @@ import com.sharecircle.enums.PickupOptions;
 public class Item 
 {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="item_id")
-	private Integer itemId;
+	@Column(name="item_id",nullable = false, length = 36)
+	private String itemId;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="owner_id",nullable=false)
@@ -111,11 +108,11 @@ public class Item
 		image.setItem(null);
 	}
 
-	public Integer getItemId() {
+	public String getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(Integer itemId) {
+	public void setItemId(String itemId) {
 		this.itemId = itemId;
 	}
 
