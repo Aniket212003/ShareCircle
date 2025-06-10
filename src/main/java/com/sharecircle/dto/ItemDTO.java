@@ -2,6 +2,7 @@ package com.sharecircle.dto;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 import com.sharecircle.enums.Category;
 import com.sharecircle.enums.ListingType;
@@ -27,8 +28,24 @@ public class ItemDTO
     private String pincode;
     private String address;
     private Collection<Part> FileParts;
+    private List<String> imageNames;
+    private UserProfileDTO owner;
     
-    public Integer getUserId() {
+    
+   
+	public UserProfileDTO getOwner() {
+		return owner;
+	}
+	public void setOwner(UserProfileDTO owner) {
+		this.owner = owner;
+	}
+	public List<String> getImageNames() {
+		return imageNames;
+	}
+	public void setImageNames(List<String> imageNames) {
+		this.imageNames = imageNames;
+	}
+	public Integer getUserId() {
 		return userId;
 	}
 	public void setUserId(Integer userId) {

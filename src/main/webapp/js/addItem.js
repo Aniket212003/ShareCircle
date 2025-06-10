@@ -56,23 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById("startDate").setAttribute("min", today);
             document.getElementById("endDate").setAttribute("min", today);
-            // Show/hide price fields based on listing type
-            const listingTypes = document.querySelectorAll('.listing-type');
-            const rentPriceField = document.getElementById('rentPriceField');
-            const sellPriceField = document.getElementById('sellPriceField');
-            
-            listingTypes.forEach(type => {
-                type.addEventListener('change', function() {
-                    rentPriceField.classList.add('hidden');
-                    sellPriceField.classList.add('hidden');
-                    
-                    if (this.value === 'rent') {
-                        rentPriceField.classList.remove('hidden');
-                    } else if (this.value === 'sell') {
-                        sellPriceField.classList.remove('hidden');
-                    }
-                });
-            });
             
             // Set minimum end date based on start date
             const startDateInput = document.getElementById('startDate');

@@ -249,5 +249,14 @@ public class Item
 		return owner;
 	}
 	
+	@Override
+	public String toString() {
+		return "Item [itemId=" + itemId + ", owner=" + owner + ", itemName=" + itemName + ", category=" + category
+				+ ", shortDescription=" + shortDescription + ", DetailedDescription=" + DetailedDescription
+				+ ", listingType=" + listingType + ", rentPrice=" + rentPrice + ", rentDeposit=" + rentDeposit
+				+ ", sellPrice=" + sellPrice + ", isAvailable=" + isAvailable + ", pickupOptions=" + pickupOptions
+				+ ", startDate=" + startDate + ", endDate=" + endDate + ", pincode=" + pincode + ", address=" + address
+				+ ", createdAt=" + createdAt + ", images=" + images + "]";
+	}
 	
 }

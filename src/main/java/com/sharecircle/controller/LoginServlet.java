@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet
 			{
 				HttpSession session = request.getSession();
 				session.setAttribute("userName", verifyUser);
-				request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+				request.getRequestDispatcher("./dashboardLoadServlet").forward(request, response);
 			}
 			else
 			{

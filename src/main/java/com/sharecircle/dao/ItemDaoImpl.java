@@ -1,8 +1,11 @@
 package com.sharecircle.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.sharecircle.entities.Item;
 import com.sharecircle.enums.ItemStatus;
@@ -27,6 +30,25 @@ public class ItemDaoImpl implements ItemDao
 			e.printStackTrace();
 			txn.rollback();
 			return ItemStatus.FAILURE;
+		}
+	}
+	
+	@Override
+	public List<Item> getAllItem() 
+	{
+		try(Session session = sessionFactory.openSession())
+		{
+			Query<Item> query = session.createQuery("select distinct i " +
+		            "from Item i " +
+		            "   left join fetch i.images img " +
+		            "   join fetch i.owner u",
+		            Item.class);
+			return query.list();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
 		}
 	}
 

@@ -132,23 +132,22 @@
                                 </div>
                             </div>
                             
-                            <!-- Price Fields (hidden by default) -->
-                            <div class="row mb-3 price-field" id="rentPriceField">
-                                <div class="col-md-6">
-                                    <label for="rentPrice" class="form-label">Rent Price per Day (₹)</label>
-                                    <input type="number" class="form-control" id="rentPrice" name="rentPrice" min="0" step="1">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="rentDeposit" class="form-label">Security Deposit (₹)</label>
-                                    <input type="number" class="form-control" id="rentDeposit" name="rentDeposit" min="0" step="1">
-                                </div>
-                            </div>
-                            
-                            <div class="mb-3 price-field" id="sellPriceField">
-                                <label for="sellPrice" class="form-label">Selling Price (₹)</label>
-                                <input type="number" class="form-control" id="sellPrice" name="sellPrice" min="0" step="1">
-                            </div>
-                            
+                            <!-- Price Fields (now visible by default) -->
+							<div class="row mb-3 price-field" id="rentPriceField">
+							    <div class="col-md-6">
+							        <label for="rentPrice" class="form-label">Rent Price per Day (₹)</label>
+							        <input type="number" class="form-control" id="rentPrice" name="rentPrice" min="0" step="1">
+							    </div>
+							    <div class="col-md-6">
+							        <label for="rentDeposit" class="form-label">Security Deposit (₹)</label>
+							        <input type="number" class="form-control" id="rentDeposit" name="rentDeposit" min="0" step="1">
+							    </div>
+							</div>
+							
+							<div class="mb-3 price-field" id="sellPriceField">
+							    <label for="sellPrice" class="form-label">Selling Price (₹)</label>
+							    <input type="number" class="form-control" id="sellPrice" name="sellPrice" min="0" step="1">
+							</div>
                             <!-- Pickup Options -->
                             <div class="mb-3">
                                 <label class="form-label">Pickup Options *</label>

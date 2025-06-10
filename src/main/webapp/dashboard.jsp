@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ include file="sessionCheck.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,7 +108,7 @@
                                 </div>
                             </a>
                         </div>
-                        <button class="btn btn-outline-primary w-100 mt-3">Manage All Items</button>
+                        <button class="btn btn-outline-primary w-100 mt-3" value="Manage_All_Items">Manage All Items</button>
                     </div>
                 </div>
             </div>
@@ -145,7 +147,7 @@
                                 </div>
                             </a>
                         </div>
-                        <button class="btn btn-outline-primary w-100 mt-3">View All Requests</button>
+                        <button class="btn btn-outline-primary w-100 mt-3" value="View_All_Requests">View All Requests</button>
                     </div>
                 </div>
             </div>
@@ -171,13 +173,14 @@
                         
                         <!-- Filter Buttons -->
                         <div class="mb-4 text-center">
-                            <button class="btn btn-outline-secondary filter-btn">All</button>
-                            <button class="btn btn-outline-secondary filter-btn">Books</button>
-                            <button class="btn btn-outline-secondary filter-btn">Study Materials</button>
-                            <button class="btn btn-outline-secondary filter-btn">Electronics</button>
-                            <button class="btn btn-outline-secondary filter-btn">Tools</button>
-                            <button class="btn btn-outline-secondary filter-btn">Sports</button>
-                            <button class="btn btn-outline-secondary filter-btn">Furniture</button>
+                            <button class="btn btn-outline-secondary filter-btn" value="ALL">All</button>
+                            <c:forEach var="cat" items="${categories}">
+    						<button
+      								class="btn btn-outline-secondary filter-btn"
+      								value="${cat.name()}">
+      								${fn:replace(fn:toLowerCase(cat.name()), '_', ' ')}
+    						</button>
+  							</c:forEach>
                         </div>
                         
                         <!-- Items Grid -->
@@ -185,13 +188,13 @@
                             <!-- Item 1 -->
                             <div class="col-md-3 mb-4">
                                 <div class="card h-100 item-card">
-                                    <img src="https://via.placeholder.com/300x200?text=Textbook" class="card-img-top rounded-top" alt="Textbook">
+                                    <img src="${image}" class="card-img-top rounded-top" alt="Textbook">
                                     <div class="card-body">
-                                        <h6 class="card-title">Calculus Textbook</h6>
-                                        <p class="card-text text-muted small">Advanced mathematics textbook - 3rd edition</p>
+                                        <h6 class="card-title">${itemName}</h6>
+                                        <p class="card-text text-muted small">${shortDes}</p>
                                         <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <span class="badge bg-success">Available</span>
-                                            <small class="text-primary">$5/day</small>
+                                            <span class="badge bg-success">${availabilty}</span>
+                                            <small class="text-primary">Free</small>
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <button class="btn btn-sm btn-primary">Borrow</button>

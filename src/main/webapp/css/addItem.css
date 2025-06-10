@@ -187,9 +187,3 @@
             cursor: pointer;
             font-size: 12px;
         }
-        .hidden {
-            display: none;
-        }
-        .price-field {
-            display: none;
-        }
