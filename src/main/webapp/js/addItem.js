@@ -1,24 +1,29 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() 
+{
             // Image upload preview functionality
             const itemImagesInput = document.getElementById('itemImages');
             const imagePreviewContainer = document.getElementById('imagePreviewContainer');
             const maxImages = 3;
             let uploadedImages = [];
             
-            itemImagesInput.addEventListener('change', function(e) {
+            itemImagesInput.addEventListener('change', function(e) 
+            {
                 const files = e.target.files;
                 imagePreviewContainer.innerHTML = '';
                 uploadedImages = [];
                 
-                if (files.length > maxImages) {
+                if (files.length > maxImages) 
+                {
                     alert(`You can upload a maximum of ${maxImages} images.`);
                     this.value = '';
                     return;
                 }
                 
-                for (let i = 0; i < files.length; i++) {
+                for (let i = 0; i < files.length; i++) 
+                {
                     const file = files[i];
-                    if (!file.type.match('image.*')) {
+                    if (!file.type.match('image.*')) 
+                    {
                         continue;
                     }
                     
@@ -76,5 +81,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     e.preventDefault();
                     alert('Please upload at least one image.');
                 }
-            });
-        });
+            });            
+});
+     
+        
+        // after all your existing code in DOMContentLoaded…
+        

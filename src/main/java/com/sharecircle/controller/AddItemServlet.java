@@ -137,6 +137,7 @@ public class AddItemServlet extends HttpServlet {
 	            itemDTO.setIsAvailable(true);
 	            itemDTO.setPincode(pincode);
 	            itemDTO.setAddress(address);
+	            itemDTO.setFileParts(parts);
             }
             else
             {
@@ -157,7 +158,8 @@ public class AddItemServlet extends HttpServlet {
 	            itemDTO.setIsAvailable(true);
 	            itemDTO.setPincode(pincode);
 	            itemDTO.setAddress(address);
-            }
+	            itemDTO.setFileParts(parts);
+	        }
             	            
 	        ItemStatus status = itemService.addItem(itemDTO);
             
